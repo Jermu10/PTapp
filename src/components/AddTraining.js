@@ -7,8 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 
 export default function Addtraining(props) {
-    //const [customers, setCustomers] = useState([]);
-    const [training, setTraining] = useState({date: '', duration: '', activity: ''})
+    const [customers, setCustomers] = useState([]);
+    const [training, setTraining] = useState({date: '', duration: '', activity: '', customer: props.link})
     
     const [open, setOpen] = useState(false);
 
@@ -38,11 +38,11 @@ export default function Addtraining(props) {
     const fetchCustomers = () => {
         fetch("https://customerrest.herokuapp.com/api/customers")
             .then((response) => response.json())
-            // .then((data) => setCustomers(data.content));
+            .then((data) => setCustomers(data.content));
     }
 
-    // const customerOptions =
-    // customers.map(customer => ({ label: customer.firstname + " " + customer.lastname }))
+        const customerOptions =
+        customers.map(customer => ({ label: customer.firstname + " " + customer.lastname }))
 
   
     return (

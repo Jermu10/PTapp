@@ -40,6 +40,14 @@ export default function Trainings() {
         }
     }
 
+    const updateTraining = (training) => {
+        fetch('https://customerrest.herokuapp.com/api/trainings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(training)
+        })
+    }
+
 
 
     const columns = [
@@ -48,7 +56,8 @@ export default function Trainings() {
         {header: 'Duration', field: 'duration', sortable: true, filter: true},
         {header: 'Customer', field: 'customerFirstname', sortable: true, filter: true},
         {header: 'Customer', field: 'customerLastname', sortable: true, filter: true},
-        {header: 'Delete', field: "id", cellRenderer: (params) => <Button color='error' onClick={() => deleteTraining(params.value)}>Delete</Button>}
+        {header: 'Delete', field: "id", cellRenderer: (params) => <Button color='error' onClick={() => deleteTraining(params.value)}>Delete</Button>},
+        {header: 'Update', field: "id", cellRenderer: (params) => <Button color='primary' onClick={() => updateTraining(params.value)}>Update</Button>}
     ]
 
 
@@ -67,4 +76,5 @@ export default function Trainings() {
                 </div>
         </div>
     )
-};
+}
+

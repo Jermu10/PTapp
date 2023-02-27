@@ -39,8 +39,18 @@ export default function Customers() {
         .catch(err => console.error(err))
         
         }
-        
     }
+
+    const updateCustomer = (customer) => {
+        fetch('https://customerrest.herokuapp.com/api/customers', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(customer)
+        })
+        .then(_ => fetchCustomers())
+        .catch(err => console.error(err))
+    }
+
 
     const columns = [
         {header: 'Firstname', field: 'firstname', sortable: true, filter: true},
@@ -50,8 +60,8 @@ export default function Customers() {
         {header: 'City', field: 'city', sortable: true, filter: true},
         {header: 'Email', field: 'email', sortable: true, filter: true},
         {header: 'Phone', field: 'phone', sortable: true, filter: true},
-        {header: 'Delete', field: "id", cellRenderer: (params) => <Button color='error' onClick={() => deleteCustomer(params.value)}>Delete</Button>}
-        
+        {header: 'Delete', field: "id", cellRenderer: (params) => <Button color='error' onClick={() => deleteCustomer(params.value)}>Delete</Button>},
+        {header: 'Update', field: "id", cellRenderer: (params) => <Button color='primary' onClick={() => updateCustomer(params.value)}>Update</Button>}
     ]   
 
     return(
@@ -66,7 +76,6 @@ export default function Customers() {
                 </AgGridReact>
             </div>
         </div>
-    )
-    
-    
-};
+    )   
+}
+
